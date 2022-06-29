@@ -1,0 +1,18 @@
+
+add_library( worth_jsonball
+   mm_ticks.cpp
+   rc_params.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/worth/jsonball/jsonball.hpp
+)
+
+target_link_libraries( worth_jsonball fc )
+
+target_include_directories( worth_jsonball PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include" )
+
+INSTALL( TARGETS
+   worth_jsonball
+
+   RUNTIME DESTINATION bin
+   LIBRARY DESTINATION lib
+   ARCHIVE DESTINATION lib
+)

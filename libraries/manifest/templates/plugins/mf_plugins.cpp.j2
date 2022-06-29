@@ -1,0 +1,19 @@
+#include <appbase/application.hpp>
+#include <boost/preprocessor/seq/for_each.hpp>
+
+#include <worth/manifest/plugins.hpp>
+
+{% for plugin in plugins %}
+#include <worth/plugins/{{ plugin["plugin_name"] }}/{{ plugin["plugin_name"] }}_plugin.hpp>
+{% endfor %}
+
+namespace worth { namespace plugins {
+
+void register_plugins()
+{
+   {% for plugin in plugins %}
+   appbase::app().register_plugin< worth::plugins::{{ plugin["plugin_namespace"] }}::{{ plugin["plugin_name" ] }}_plugin >();
+   {% endfor %}
+}
+
+} }

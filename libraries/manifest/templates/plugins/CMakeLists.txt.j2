@@ -1,0 +1,23 @@
+
+add_library( worth_plugins
+   mf_plugins.cpp
+   ${CMAKE_CURRENT_SOURCE_DIR}/include/worth/manifest/plugins.hpp
+)
+
+target_link_libraries( worth_plugins appbase fc
+{% for plugin in plugins %}
+   {{ plugin["plugin_project"] }}
+{% endfor %}
+)
+
+target_include_directories( worth_plugins
+   PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include"
+   )
+
+INSTALL( TARGETS
+   worth_plugins
+
+   RUNTIME DESTINATION bin
+   LIBRARY DESTINATION lib
+   ARCHIVE DESTINATION lib
+)
